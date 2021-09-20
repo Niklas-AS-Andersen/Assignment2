@@ -16,34 +16,39 @@ namespace Assignment2
         public DateTime EndDate { get; set; }
         public DateTime GraduationDate { get; set; }
 
-        public Student(int id, int startyear, int endYear = startyear + 3)
+
+        public Student(int id, int startyear) : this(id, startyear, startyear + 3)
+        {
+        }
+
+        public Student(int id, int startyear, int endYear)
         {
             Id = id;
 
-            StartDate = DateTime(startyear, 9, 1);
-            EndDate = DateTime(startyear, 6, 29);
-            GraduationDate = DateTime(startyear + 3, 6, 29);
+            StartDate = new DateTime(startyear, 9, 1);
+            GraduationDate = new DateTime(startyear + 3, 6, 29);
+            EndDate = new DateTime(endYear, 6, 29);
 
             _status = StudentEnrollmentStatus();
         }
 
         public Status StudentEnrollmentStatus()
         {
-            var newlyEnrolled = DateTime.Compare( DateTime.Now, StartDate.AddDays(14) ) < 0;
-            var graduatedOrDroppedOut = DateTime.Compare( GraduationDate, EndDate) > 0;
+            var newlyEnrolled = DateTime.Compare(DateTime.Now, StartDate.AddDays(90)) < 0;
+            var graduatedOrDroppedOut = DateTime.Compare(GraduationDate, EndDate) > 0;
 
-            if (graduatedOrDroppedOut == false) return Status.Dropout;
+            if (graduatedOrDroppedOut) return Status.Dropout;
 
-            switch ()
+
+            if (graduatedOrDroppedOut)
             {
-                case (graduatedOrDroppedOut):
-                    return Status.Graduated;
-                case (newlyEnrolled):
-                    return Status.New;
-                default:
-                    return Status.Active;
-                
+                return Status.Graduated;
             }
+            if (newlyEnrolled)
+            {
+                return Status.New;
+            }
+            return Status.Active;
         }
     }
 }
