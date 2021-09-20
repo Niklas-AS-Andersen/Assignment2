@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using Xunit;
 using static Assignment2.Status;
 
@@ -36,7 +37,11 @@ namespace Assignment2.Tests
         [Fact]
         public void Status_cant_be_overwritten()
         {
+            var stud = new Student(1, 2021);
 
+            AttributeCollection attributes = TypeDescriptor.GetProperties(stud)["_status"].Attributes;
+
+            Assert.Equal(ReadOnlyAttribute.Yes, attributes[typeof(ReadOnlyAttribute)]);
         }
     }
 }
