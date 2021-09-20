@@ -18,6 +18,18 @@ namespace Assignment2.Tests
 
             Assert.Equal(id, stud.Id);
         }
+
+        [Fact]
+        public void Can_only_set_id_on_student_at_creation()
+        {
+            var stud = new Student(5, 1900);
+
+            AttributeCollection attributes = TypeDescriptor.GetProperties(stud)["Id"].Attributes;
+
+            Assert.Equal(ReadOnlyAttribute.Yes, attributes[typeof(ReadOnlyAttribute)]);
+            Assert.Equal(5, stud.Id);
+        }
+
         [Fact]
         public void New_student_can_give_end_date()
         {
