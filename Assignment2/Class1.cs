@@ -1,5 +1,4 @@
 ﻿using System;
-using static Assignment2.Status;
 
 namespace Assignment2
 {
@@ -49,6 +48,11 @@ namespace Assignment2
                 return Status.New;
             }
             return Status.Active;
+        }
+
+        
+        public string toString(){
+            return $"{GivenName} {Surname}, {Id} is {_status}\nStart date: {StartDate}\nEnd date: {EndDate}\nGraduation date: {GraduationDate}";
         }
     }
 }
