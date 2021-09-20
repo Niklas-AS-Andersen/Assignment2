@@ -50,5 +50,10 @@ namespace Assignment2
             }
             return Status.Active;
         }
+
+        
+        public string toString(){
+            return $"{GivenName} {Surname}, {Id} is {_status}\nStart date: {StartDate}\nEnd date: {EndDate}\nGraduation date: {GraduationDate}";
+        }
     }
 }

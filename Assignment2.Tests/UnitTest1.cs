@@ -38,5 +38,17 @@ namespace Assignment2.Tests
         {
 
         }
+
+        [Fact]
+        public void Student_Returns_Correct_To_String()
+        {
+            var stud = new Student(9, 2021);
+            stud.Surname = "Hansen";
+            stud.GivenName = "Emil";
+
+            var expected = "Emil Hansen, 9 is New\nStart date: 01-09-2021 00:00:00\nEnd date: 29-06-2024 00:00:00\nGraduation date: 29-06-2024 00:00:00";
+
+            Assert.Equal(expected, stud.toString());
+        }
     }
 }
