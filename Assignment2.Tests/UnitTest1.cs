@@ -38,5 +38,67 @@ namespace Assignment2.Tests
         {
 
         }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(123)]
+        [InlineData(-1)]
+        [InlineData(Int32.MaxValue - 3)]
+        public void Two_New_ImmutableStudents_given_same_id_returns_same_id(int id)
+        {
+            var stud = new ImmutableStudent(id, "Hello", "world", Status.Active, new DateTime(1,2,4), new DateTime(2,4,8), new DateTime(2,4,8));
+
+            Assert.True(stud.Equals(stud));
+        }
+
+        [Theory]
+        [InlineData(1, 2)]
+        [InlineData(123, 321)]
+        [InlineData(-1, 1)]
+        [InlineData(Int32.MaxValue - 3, 3)]
+        public void Two_New_ImmutableStudents_given_different_ids_returns_different_ids(int id1, int id2)
+        {
+            var stud1 = new ImmutableStudent(id1, "Hello", "world", Status.Active, new DateTime(1,2,4), new DateTime(2,4,8), new DateTime(2,4,8));
+            var stud2 = new ImmutableStudent(id2, "Hello", "world", Status.Active, new DateTime(1,2,4), new DateTime(2,4,8), new DateTime(2,4,8));
+
+            Assert.False(stud1.Equals(stud2));
+        }
+
+        [Theory]
+        [InlineData(Status.New)]
+        [InlineData(Status.Active)]
+        [InlineData(Status.Dropout)]
+        [InlineData(Status.Graduated)]
+        public void Two_New_ImmutableStudents_given_same_status_returns_same_status(Status status)
+        {
+            var stud = new ImmutableStudent(1, "Hello", "world", status, new DateTime(1,2,4), new DateTime(2,4,8), new DateTime(2,4,8));
+
+            Assert.True(stud.Equals(stud));
+        }
+
+        [Theory]
+        [InlineData(Status.New, Status.Active)]
+        [InlineData(Status.Active, Status.Dropout)]
+        [InlineData(Status.Dropout, Status.Graduated)]
+        [InlineData(Status.Graduated, Status.New)]
+        public void Two_New_ImmutableStudents_given_differenct_status_returns_different_status(Status status1, Status status2)
+        {
+            var stud1 = new ImmutableStudent(1, "Hello", "world", status1, new DateTime(1,2,4), new DateTime(2,4,8), new DateTime(2,4,8));
+            var stud2 = new ImmutableStudent(1, "Hello", "world", status2, new DateTime(1,2,4), new DateTime(2,4,8), new DateTime(2,4,8));
+
+            Assert.False(stud1.Equals(stud2));
+        }
+
+        [Theory]
+        [InlineData(Status.New)]
+        [InlineData(Status.Active)]
+        [InlineData(Status.Dropout)]
+        [InlineData(Status.Graduated)]
+        public void Two_New_ImmutableStudents_given_same_status_returns_same_status_ToString(Status status)
+        {
+            var stud = new ImmutableStudent(1, "Hello", "world", status, new DateTime(1,2,4), new DateTime(2,4,8), new DateTime(2,4,8));
+
+            Assert.Equal(stud.ToString(), stud.ToString());
+        }
     }
 }
